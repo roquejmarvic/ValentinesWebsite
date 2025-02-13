@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine?</title>
+    <link rel="stylesheet" type="text/css" href="css/site.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="js/site.js"></script>
+</head>
+<body>
+    <div class="container" id="mainContainer">
+        <h1 id="valentineText" style="text-align: center">Hi Quinteza Bartolome, 💙💖</h1>
+        <p id="hiddenMessage" style="opacity: 0; transition: opacity 0.5s; font-size: 16px; text-align: center; color: #ff80bf;">
+            I’ll keep waiting... 💌
+        </p>
+        <p id="messageBox" style="font-size: 18px; text-align: center; color: #ff4d6d;"></p>
+
+
+        <div class="gif-container">
+            <img src="https://i.pinimg.com/originals/c0/f5/ae/c0f5ae81c90af4a43b91806b82fd3505.gif">
+        </div>
+
+        <div class="button-container">
+            <button id="yes-btn" class="yes-button" onclick="openModal()">Yes 💕</button>
+            <button id="no-btn" class="no-button" onclick="growYes()">No 💔</button>
+        </div>
+    </div>
+
+    <!-- Modal for Video -->
+    <div id="valentineModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <video id="valentineVideo" controls>
+                <source src="valentineVideo.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+
+    <!-- Letter Section (Hidden Initially) -->
+    <div id="loveLetter" class="hidden">
+        <h1>💖 To Teza, my Love 💖</h1>
+        <p>
+            Hi Love, yun lang ... joke, <br><br>
+            From the moment I met you back in 3 years, my world has been brighter. Your smile, your laughter, and your kindness make every day special.
+            You gave me one of the most valuable things in the world which is your love.<br><br>
+            Today, I just want to tell you that you are truly amazing, and I feel so lucky to have you in my life. You just want nothing but the best for me,
+            which I appreciate so much. You give and sacrifice almost everything just for your loved ones and especially for me.<br><br>
+            Wala na talaga ako hihingiin pang iba kung hindi ikaw at ikaw lang. Thank you for being you. 💕
+        </p>
+        <p>With all my heart, <br><strong>Your Yeobo, Your Big Teddy Bear, Your Shoulder to Lean On, and Your Love 😘</strong></p>
+
+        <!-- Second Hidden Video (Same Video) -->
+        <div id="watchAgain">
+            <h2>🎥 PS. Alam ko sisirain mo replay button ito yung replay XD 🎥</h2>
+            <video id="watchAgainVideo" controls>
+                <source src="valentineVideo.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+
+    <!-- Background Hearts Animation -->
+    <div class="hearts-container"></div>
+
+    <script>
+        // Open Modal and Play Video
+        function openModal() {
+            document.getElementById("valentineModal").style.display = "flex";
+            document.getElementById("valentineVideo").play();
+        }
+
+        // Close Modal and Pause Video
+        function closeModal() {
+            document.getElementById("valentineModal").style.display = "none";
+            document.getElementById("valentineVideo").pause();
+        }
+
+        // Redirect after video ends
+        document.getElementById("valentineVideo").onended = function () {
+            closeModal();
+            document.getElementById("mainContainer").style.display = "none"; // Hide original content
+            document.getElementById("valentineModal").style.display = "none"; // Hide modal
+            document.getElementById("loveLetter").classList.remove("hidden"); // Show letter
+        };
+
+        // Heart animation script
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤️';
+            heart.classList.add('heart');
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = Math.random() * 3 + 2 + "s";
+            document.querySelector('.hearts-container').appendChild(heart);
+
+            setTimeout(() => { heart.remove(); }, 5000);
+        }
+
+        setInterval(createHeart, 300);
+    </script>
+</body>
+</html>
